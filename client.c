@@ -1,27 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malbuque <malbuque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 21:48:25 by malbuque          #+#    #+#             */
-/*   Updated: 2022/05/25 21:49:34 by malbuque         ###   ########.fr       */
+/*   Created: 2022/05/25 21:47:58 by malbuque          #+#    #+#             */
+/*   Updated: 2022/05/25 21:51:22 by malbuque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-
-# include "libft.h"
-# include <stdbool.h>
-# include <signal.h>
-# include <zconf.h>
-
-# define TRUE 1
-# define FALSE 0
-
-void	errors(char *error_msg);
-void	messages(void);
-
-#endif
+#include "minitalk.h"
