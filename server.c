@@ -6,8 +6,17 @@
 /*   By: malbuque <malbuque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:48:06 by malbuque          #+#    #+#             */
-/*   Updated: 2022/05/25 21:51:29 by malbuque         ###   ########.fr       */
+/*   Updated: 2022/05/26 18:53:41 by malbuque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+int main(void)
+{
+	ft_printf("\nHelo_World\nstr = %s\n", ft_strdup("OLA MAlta."));
+	
+	
+	
+	return (0);
+}

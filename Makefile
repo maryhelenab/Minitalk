@@ -6,15 +6,16 @@
 #    By: malbuque <malbuque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 21:47:47 by malbuque          #+#    #+#              #
-#    Updated: 2022/05/25 22:19:16 by malbuque         ###   ########.fr        #
+#    Updated: 2022/05/26 18:52:00 by malbuque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 		minitalk
-CLIENT =	client
-SERVER =	server
+NAME = 		server
+#CLIENT =	client
+#SERVER =	server
 
-PROG_SRC = 		main.c
+# Variavel do executaveis
+PROG_SRC = 		server.c
 PROG_OBJ = 		$(PROG_SRC:.c=.o)
 
 # Variavel da biblioteca - Caminho dos arquivos do libft
@@ -65,6 +66,6 @@ clean:
 	$(RM_DIR) $(OBJS_PATH)
 
 fclean:	clean cleanlib
-			$(RM) $(NAME)
+			$(RM) $(NAME) $(PROG_OBJ)
 
 re:fclean all
