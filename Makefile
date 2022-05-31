@@ -6,7 +6,7 @@
 #    By: malbuque <malbuque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 21:47:47 by malbuque          #+#    #+#              #
-#    Updated: 2022/05/26 18:52:00 by malbuque         ###   ########.fr        #
+#    Updated: 2022/05/31 21:37:52 by malbuque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,9 @@ cleanlib:
 	$(MAKE) -C $(LIB_PATH) fclean
 
 clean:
-	$(RM_DIR) $(OBJS_PATH)
+	$(RM) $(PROG_OBJ)
 
 fclean:	clean cleanlib
-			$(RM) $(NAME) $(PROG_OBJ)
+	$(RM) $(NAME)
 
 re:fclean all
