@@ -6,52 +6,53 @@
 /*   By: malbuque <malbuque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:48:06 by malbuque          #+#    #+#             */
-/*   Updated: 2022/05/31 20:49:39 by malbuque         ###   ########.fr       */
+/*   Updated: 2022/06/14 19:51:30 by malbuque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	sig_handler(int signum, siginfo_t *info, void *context)
+static void	action(int sig, siginfo_t *info, void *context)
 {
-	static char	c = 0xFF;
-	static int	bits = 0;
+	static unsigned char	c = 0;
+	static int				i = 0;
 
 	(void)context;
-	if (signum == SIGUSR1)
-		c |= 0x80 >> bits;
-	else if (signum == SIGUSR2)
-		c ^= 0x80 >> bits;
-	if (++bits == 8)
+	if (sig == SIGINT)
 	{
-		ft_putchar_fd(c, 1);
+		write(STDOUT_FILENO, "Until the next interaction\n", 28);
+		exit(-1);
+	}
+	if (i < 9)
+		c = ((sig - 30) << i++) | c;
+	if (i == 8)
+	{
+		i = 0;
+		write(STDOUT_FILENO, &c, 1);
 		if (!c)
 		{
-			if (kill(info->si_pid, SIGUSR2) == -1)
-				exit(EXIT_FAILURE);
+			write(STDOUT_FILENO, "\n", 1);
+			kill(info->si_pid, SIGUSR1);
+			return ;
+			usleep(1000);
 		}
-		bits = 0;
-		c = 0xFF;
+		c = 0;
 	}
 }
 
-int main(void)
+int	main(void)
 {
-	struct sigaction	sig;
-	sigset_t			block;
-	pid_t				pid;
+	pid_t				ip;
+	struct sigaction	signal_action;
 
-	sigemptyset(&block);
-	sigaddset(&block, SIGUSR1);
-	sigaddset(&block, SIGUSR2);
-	sig.sa_flags = SA_SIGINFO;
-	sig.sa_sigaction = sig_handler;
-	pid = getpid();
-	ft_putstr_fd("PID: ", 1);
-	ft_putnbr_fd(pid, 1);
-	ft_putchar_fd('\n', 1);
-	sigaction(SIGUSR1, &sig, NULL);
-	sigaction(SIGUSR2, &sig, NULL);
+	signal_action.sa_flags = SA_SIGINFO;
+	signal_action.sa_sigaction = action;
+	sigaction(SIGINT, &signal_action, NULL);
+	sigaction(SIGUSR1, &signal_action, NULL);
+	sigaction(SIGUSR2, &signal_action, NULL);
+	ip = getpid();
+	ft_printf("PID: %d\n", ip);
 	while (1)
 		pause();
+	return (0);
 }

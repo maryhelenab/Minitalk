@@ -6,13 +6,13 @@
 #    By: malbuque <malbuque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 21:47:47 by malbuque          #+#    #+#              #
-#    Updated: 2022/05/31 21:37:52 by malbuque         ###   ########.fr        #
+#    Updated: 2022/06/14 19:22:21 by malbuque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 		server
-#CLIENT =	client
-#SERVER =	server
+SERVER =	server
+CLIENT =	client
+
 
 # Variavel do executaveis
 PROG_SRC = 		server.c
@@ -40,7 +40,7 @@ INCLUDES	= -I$(LIB_PATH)/includes -I../Minitalk
 RM_DIR		= rm -Rf
 RM			= rm -f
 
-all:	$(NAME)
+all:	$(SERVER) $(CLIENT)
 
 # Regra para compilar o libft
 $(LIBFT):
@@ -56,16 +56,17 @@ $(OBJS_PATH):
 
 # Copilar o executavel -- -g para begug -L vai buscar o diretorio da variavel 
 # -lft -o definier o nome do binario/ output
-$(NAME): $(PROG_OBJ) $(LIBFT)
+$(SERVER): $(PROG_OBJ) $(LIBFT)
 			$(CC) $(CFLAGS) -g -L$(LIB_PATH) -lft $(^) -o $(@)
 
 cleanlib:
 	$(MAKE) -C $(LIB_PATH) fclean
 
 clean:
-	$(RM) $(PROG_OBJ)
+	$(RM) *.o
+#$(PROG_OBJ)
 
 fclean:	clean cleanlib
-	$(RM) $(NAME)
+	$(RM) $(SERVER) $(CLIENT)
 
 re:fclean all
